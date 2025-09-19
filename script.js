@@ -87,3 +87,14 @@ contactForm?.addEventListener('submit', async (e) => {
     alert('Sorry, something went wrong. Please try again.');
   }
 });
+/* ===== FIX: highlight correct nav after Back/Forward ===== */
+(function () {
+  const markActive = () => {
+    const current = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-link').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === current);
+    });
+  };
+  window.addEventListener('pageshow', markActive); // fires on Back/Forward
+  markActive(); // also run now (normal load)
+})();
